@@ -41,7 +41,7 @@ public class SshSettings {
      * Ignore this if connecting to a Windows machine.
      */
     @Builder.Default
-    private final String display = ":10.0";
+    private final String display = ":0.0";
 
     Session createSession() throws JSchException {
         final Session session = new JSch().getSession(getUsername(), getHost(), getPort());
