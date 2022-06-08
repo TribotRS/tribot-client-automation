@@ -213,7 +213,12 @@ public class Client {
 				                       })
 				                       .collect(Collectors.joining(" "));
 				log.debug("Launching remote client: {}", cmd);
-				channel.setCommand(cmd);
+				if (getSshSettings().getDisplay() != null && !getSshSettings().getDisplay().isEmpty()) {
+					channel.setCommand("export DISPLAY=" + getSshSettings().getDisplay() + " && " + cmd);
+				}
+				else {
+					channel.setCommand(cmd);
+				}
 				ByteArrayOutputStream responseStream = new ByteArrayOutputStream();
 				channel.setOutputStream(responseStream);
 				ByteArrayOutputStream errorResponseStream = new ByteArrayOutputStream();

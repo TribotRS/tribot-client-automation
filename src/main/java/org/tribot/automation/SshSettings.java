@@ -35,6 +35,13 @@ public class SshSettings {
      * The ssh password to go along with the username, if required
      */
     private final String password;
+    /**
+     * The DISPLAY environment variable. This should point to wherever your graphical display is on your linux machine.
+     * Run `printenv DISPLAY` to find the DISPLAY you are using.
+     * Ignore this if connecting to a Windows machine.
+     */
+    @Builder.Default
+    private final String display = ":10.0";
 
     Session createSession() throws JSchException {
         final Session session = new JSch().getSession(getUsername(), getHost(), getPort());
